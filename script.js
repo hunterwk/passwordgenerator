@@ -2,6 +2,10 @@
 var generateBtn = document.querySelector("#generate");
 var passwordLength;
 var confirmLength;
+var confirmLowercase;
+var confirmUppercase;
+var confirmNumeric;
+var confirmCharacters;
 
 // Write password to the #password input
 function writePassword() {
@@ -23,7 +27,10 @@ function writePassword() {
             }
         } alert("You have selected a " + passwordLength +" character password.");
     }
-   
+    confirmLowercase = confirm("Would you like lowercase letters in your password?");
+    confirmUppercase = confirm("Would you like uppercase letters in your password?");
+    confirmNumeric = confirm("Would you like numbers in your password?");
+    confirmCharacters = confirm("Would you like special characters in your password?");
 
 }
 
