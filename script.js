@@ -12,20 +12,21 @@ function writePassword() {
     var password = generatePassword();
     var passwordText = document.querySelector("#password");
 
-    passwordText.value = password; 
+    passwordText.value = password;
     function generatePassword() {
         confirmLength = confirm("Would you like to specify a password length?")
         if (confirmLength === true) {
             while (true) {
-                passwordLength = parseInt(prompt("Choose a password Length between 8 and 128 characters. Select Cancel if you wish for a random length password."));
+                passwordLength = parseInt(prompt("Choose a password Length between 8 and 128 characters."));
                 /* .test makes sure the string turned integer gathered above is an actual number */
                 if (/^[0-9]+$/.test(passwordLength) && (passwordLength >= 8) && (passwordLength <= 128)) {
-                    console.log('pass');
-                    console.log(passwordLength);
                     /* once all 3 criteria are met the loop breaks */
                     break;
                 }
             } alert("You have selected a " + passwordLength + " character password.");
+        } else {
+            passwordLength= 24;
+            alert("You will receive a 24 character password.")
         };
         confirmLowercase = confirm("Would you like lowercase letters in your password?");
         if (confirmLowercase === true) {
@@ -61,21 +62,24 @@ function writePassword() {
             var sC2 = [];
             var sC3 = [];
         };
-
-        var passwordArray = [].concat(lC, uC, nC, sC1, sC2, sC3);
-        console.log(passwordArray);
-        actualPassword ="";
-
-        for (i = 0; i <= passwordLength; i++) {
-            var max = passwordArray.length;
-            var randInt = Math.floor(Math.random() * max);
-            actualPassword += (passwordArray[randInt]);
+        if (confirmLowercase === true || confirmUppercase === true || confirmNumeric === true || confirmCharacters === true){
+            var passwordArray = [].concat(lC, uC, nC, sC1, sC2, sC3);
+            console.log(passwordArray);
+            actualPassword = "";
+    
+            for (i = 1; i <= passwordLength; i++) {
+                var max = passwordArray.length;
+                var randInt = Math.floor(Math.random() * max);
+                actualPassword += (passwordArray[randInt]);
+            }
+            return actualPassword;
+        } else {
+            alert("Please select a character set to use for your password. The prompt will now restart.")
         }
-        return actualPassword ;
     };
-
-
 }
+
+
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
